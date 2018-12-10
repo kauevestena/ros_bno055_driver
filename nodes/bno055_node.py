@@ -26,6 +26,10 @@ class BNO055Driver(object):
             rospy.logerr('unable to initialize IMU at port {}'.format(serial_port))
             sys.exit(-1)
 
+        # loading calib data
+        # self.device.load_calibration("/home/ubuntu/snav_ws/snav/current_calib/calib_imu.json")
+        self.device.load_calibration(rospy.get_param('bno_calib_file'))
+
         status = self.device.get_system_status()
         rospy.loginfo('system status is {} {} {} '.format(*status))
         time.sleep(1)

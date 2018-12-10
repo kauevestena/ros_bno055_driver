@@ -1,6 +1,8 @@
 <launch>
     <arg name="frame_id" default="imu_frame"/>
 
+    <param name="bno_calib_file" type="string" value="/home/ubuntu/snav_ws/snav/current_calib/calib_imu.json" />
+
     <node pkg="bosch_bno055_driver" type="bno055_node.py" name="bno055_driver" output="screen" >
         <param name="frame_id" value="$(arg frame_id)"/>
     </node>
