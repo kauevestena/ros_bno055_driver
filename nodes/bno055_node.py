@@ -93,8 +93,10 @@ class BNO055Driver(object):
 def main():
     rospy.init_node('bno055_driver')
     node = BNO055Driver()
+    rate = rospy.Rate(100) # 100hz
     while not rospy.is_shutdown():
         node.publish_data()
+        rate.sleep()
 
 if __name__ == '__main__':
     main()
