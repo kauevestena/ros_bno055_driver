@@ -38,6 +38,7 @@ class BNO055Driver(object):
 
         self.device.set_external_crystal(True)
 
+           # test queue sizes: 
         self.imu_pub = rospy.Publisher('imu/data', Imu, queue_size=1)
         self.temp_pub = rospy.Publisher('temperature', Temperature, queue_size=1)
         self.frame_id = rospy.get_param('~frame_id', '/base_imu')
