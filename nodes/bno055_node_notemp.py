@@ -7,7 +7,7 @@ import math
 import time
 
 from std_msgs.msg import Header
-from sensor_msgs.msg import Imu, Temperature
+from sensor_msgs.msg import Imu #, Temperature
 from Adafruit_BNO055.BNO055 import BNO055
 
 
@@ -39,8 +39,8 @@ class BNO055Driver(object):
         self.device.set_external_crystal(True)
 
            # test queue sizes: 
-        self.imu_pub = rospy.Publisher('imu/data', Imu, queue_size=10)
-        self.temp_pub = rospy.Publisher('temperature', Temperature, queue_size=10)
+        self.imu_pub = rospy.Publisher('imu/data', Imu, queue_size=1000)
+        # self.temp_pub = rospy.Publisher('temperature', Temperature, queue_size=1000)
         self.frame_id = rospy.get_param('~frame_id', '/base_imu')
         self.seq = 0
         self.reset_msgs()
@@ -53,8 +53,8 @@ class BNO055Driver(object):
         self.imu_msg.angular_velocity_covariance[0] = -1
         self.imu_msg.linear_acceleration_covariance[0] = -1
 
-        self.temp_msg = Temperature()
-        self.temp_msg.variance = 0
+        # self.temp_msg = Temperature()
+        # self.temp_msg.variance = 0
 
     def publish_data(self):
         h = Header()
@@ -84,9 +84,9 @@ class BNO055Driver(object):
 
         self.imu_pub.publish(self.imu_msg)
 
-        self.temp_msg.header = h
-        self.temp_msg.temperature = self.device.read_temp()
-        self.temp_pub.publish(self.temp_msg)
+        # self.temp_msg.header = h
+        # self.temp_msg.temperature = self.device.read_temp()
+        # self.temp_pub.publish(self.temp_msg)
 
         # self.reset_msgs()
 
