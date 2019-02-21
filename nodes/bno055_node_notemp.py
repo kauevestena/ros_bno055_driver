@@ -77,7 +77,8 @@ class BNO055Driver(object):
         self.imu_msg.angular_velocity.y = g[1] * math.pi / 180.0
         self.imu_msg.angular_velocity.z = g[2] * math.pi / 180.0
 
-        a = self.device.read_linear_acceleration()
+        a = self.device.read_accelerometer()
+        # a = self.device.read_linear_acceleration()
         self.imu_msg.linear_acceleration.x = a[0]
         self.imu_msg.linear_acceleration.y = a[1]
         self.imu_msg.linear_acceleration.z = a[2]
