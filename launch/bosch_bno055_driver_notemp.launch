@@ -3,6 +3,8 @@
 
     <param name="bno_calib_file" type="string" value="/home/ubuntu/snav_ws/snav/current_calib/calib_imu.json" />
 
+    <!-- the related file have frame remappings!! -->
+
     <node pkg="bosch_bno055_driver" type="bno055_node_notemp.py" name="bno055_driver" output="screen" >
         <param name="frame_id" value="$(arg frame_id)"/>
     </node>

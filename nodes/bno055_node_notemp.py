@@ -38,6 +38,18 @@ class BNO055Driver(object):
 
         self.device.set_external_crystal(True)
 
+        # x, y, z, x_sign, y_sign, z_sign = self.device.get_axis_remap()
+
+        # print([x,y,z,x_sign,y_sign,z_sign])
+
+        #### axis remapping in order to prepare for ROBOT_LOCALIZATION node
+
+        self.device.set_axis_remap(0x01,0x00,0x02,0x01,0x00,0x00)
+
+        # x, y, z, x_sign, y_sign, z_sign = self.device.get_axis_remap()
+
+        # print(""[x,y,z,x_sign,y_sign,z_sign])
+
            # test queue sizes: 
         self.imu_pub = rospy.Publisher('imu/data', Imu, queue_size=1000)
         # self.temp_pub = rospy.Publisher('temperature', Temperature, queue_size=1000)
@@ -48,10 +60,18 @@ class BNO055Driver(object):
     def reset_msgs(self):
         self.imu_msg = Imu()
 
-        # ignore the covariance data
+        # DO NOT ignore the covariance data
         self.imu_msg.orientation_covariance[0] = -1
+        self.imu_msg.orientation_covariance[4] = 0
+        self.imu_msg.orientation_covariance[8] = 0
+
         self.imu_msg.angular_velocity_covariance[0] = -1
+        self.imu_msg.angular_velocity_covariance[4] = 0
+        self.imu_msg.angular_velocity_covariance[8] = 0
+
         self.imu_msg.linear_acceleration_covariance[0] = -1
+        self.imu_msg.linear_acceleration_covariance[4] = 0
+        self.imu_msg.linear_acceleration_covariance[8] = 0
 
         # self.temp_msg = Temperature()
         # self.temp_msg.variance = 0
