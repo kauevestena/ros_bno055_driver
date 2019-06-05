@@ -61,17 +61,15 @@ class BNO055Driver(object):
         self.imu_msg = Imu()
 
         # DO NOT ignore the covariance data
-        self.imu_msg.orientation_covariance[0] = -1
-        self.imu_msg.orientation_covariance[4] = 0
-        self.imu_msg.orientation_covariance[8] = 0
-
-        self.imu_msg.angular_velocity_covariance[0] = -1
-        self.imu_msg.angular_velocity_covariance[4] = 0
-        self.imu_msg.angular_velocity_covariance[8] = 0
-
-        self.imu_msg.linear_acceleration_covariance[0] = -1
-        self.imu_msg.linear_acceleration_covariance[4] = 0
-        self.imu_msg.linear_acceleration_covariance[8] = 0
+        self.imu_msg.orientation_covariance[0] = 0.5
+        self.imu_msg.orientation_covariance[4] = 0.5
+        self.imu_msg.orientation_covariance[8] = 1.0
+        self.imu_msg.angular_velocity_covariance[0] = 3.39336019888328e-05
+        self.imu_msg.angular_velocity_covariance[4] = 2.754168502912127e-05
+        self.imu_msg.angular_velocity_covariance[8] = 2.124266372164129e-05
+        self.imu_msg.linear_acceleration_covariance[0] = 0.01002707524074803
+        self.imu_msg.linear_acceleration_covariance[4] = 0.011818466577974154
+        self.imu_msg.linear_acceleration_covariance[8] = 0.04256630201419543
 
         # self.temp_msg = Temperature()
         # self.temp_msg.variance = 0
